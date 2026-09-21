@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{{ profile.name }} | {{ profile.role }}</title>
+<meta name="description" content="{{ profile.name }} | {{ profile.role }} Portfolio" />
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<header class="nav">
+  <a href="#home" class="logo" aria-label="Home">
+    <span class="logo-mark">KM</span>
+    <span class="logo-text">{{ profile.name.split(' ')[0] }}<span>.</span></span>
+  </a>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#journey">Journey</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section id="home" class="hero">
+  <p class="badge">Available for learning &amp; opportunities</p>
+  <h1>{{ profile.tagline }}</h1>
+  <p class="sub">I'm <strong>{{ profile.name }}</strong>, a {{ profile.role }} passionate about
+     statistics, machine learning and turning raw data into real insight.</p>
+  <div class="cta-row">
+    <a href="#projects" class="btn primary">Explore My Work &rarr;</a>
+    <a href="#contact" class="btn ghost">Let's Connect</a>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <p class="eyebrow">01 / About Me</p>
+  <h2>Student today. Data scientist tomorrow.</h2>
+  <p class="lead">{{ profile.about }}</p>
+  <div class="cards two">
+    <div class="card">
+      <span class="icon">🎓</span>
+      <h3>Education</h3>
+      <p>{{ profile.institute }}</p>
+    </div>
+    <div class="card">
+      <span class="icon">📊</span>
+      <h3>Main Interest</h3>
+      <p>Data Science &middot; Machine Learning &middot; Analytics</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="section">
+  <p class="eyebrow">02 / Skills</p>
+  <h2>My current toolkit.</h2>
+  <div class="cards two">
+    {% for group in skill_groups %}
+    <div class="card">
+      <p class="tag-label">{{ group.id }} &mdash; {{ group.category }}</p>
+      <h3>{{ group.title }}</h3>
+      <p>{{ group.desc }}</p>
+      <div class="pill-row">
+        {% for tag in group.tags %}<span class="pill">{{ tag }}</span>{% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="projects" class="section">
+  <p class="eyebrow">03 / Projects</p>
+  <h2>Things I'm building.</h2>
+  <div class="cards three">
+    {% for p in projects %}
+    <div class="card">
+      <p class="tag-label">PROJECT {{ "%02d"|format(loop.index) }}</p>
+      <h3>{{ p.title }}</h3>
+      <p>{{ p.desc }}</p>
+      <div class="pill-row">
+        {% for tag in p.tags %}<span class="pill">{{ tag }}</span>{% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="journey" class="section">
+  <p class="eyebrow">04 / Journey</p>
+  <h2>Learning. Building. Growing.</h2>
+  <div class="timeline">
+    {% for j in journey %}
+    <div class="tl-item">
+      <p class="tag-label">{{ j.label }}</p>
+      <h3>{{ j.title }}</h3>
+      <p>{{ j.desc }}</p>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <p class="eyebrow">05 / Contact</p>
+  <h2>Let's build something.</h2>
+  <form id="contact-form" class="contact-form">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Email Address" required />
+    <textarea name="message" placeholder="Message" rows="4" required></textarea>
+    <button type="submit" class="btn primary">Send Message &rarr;</button>
+    <p id="form-status"></p>
+  </form>
+</section>
+
+<footer>
+  <p>&copy; {{ year }} {{ profile.name }}. All rights reserved. Built with Python &middot; Flask</p>
+</footer>
+
+<script src="/js/script.js"></script>
+</body>
+</html>
