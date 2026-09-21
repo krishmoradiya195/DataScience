@@ -12,8 +12,8 @@ from flask import Flask, render_template, request, jsonify
 
 app = Flask(
     __name__,
-    template_folder="../templates",
-    static_folder="..",
+    template_folder="templates",
+    static_folder=".",
     static_url_path="",
 )
 
